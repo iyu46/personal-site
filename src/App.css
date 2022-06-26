@@ -3,6 +3,11 @@
   text-align: center;
 }
 
+.footerText {
+  color: white;
+  font-size: 1rem;
+}
+
 .chatbox {
   min-height: 100vh;
   min-width: 20vw;

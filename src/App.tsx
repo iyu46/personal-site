@@ -1,16 +1,41 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import logo from './logo.svg';
 import { MessageContext } from './context/MessageContext';
 import Bubble from './components/Bubble';
+import {
+    greetingInfo1,
+    greetingInfo2,
+    greetingInfo3,
+    greetingInfo4,
+} from './information/informationConstants';
 
 const App = () => {
     const [ currentMessage, setCurrentMessage ] = useState<string>('');
-    const [ messageLog, setMessageLog ] = useState<string[]>(["hello!", "hi!", "how are you?", "good, thanks!"]);
+    const [ nextMessage, setNextMessage ] = useState<string>('');
+    const [ messageLog, setMessageLog ] = useState<string[]>([]);
     const [ isChatboxMoving, setIsChatboxMoving ] = useState<boolean>(false);
     const [ isMessageIncoming, setIsMessageIncoming ] = useState<boolean>(false);
     const [ isClearingLog, setIsClearingLog ] = useState<boolean>(false);
     let colourCounter = 0;
+
+    useEffect(() => {
+        setTimeout(() => {
+            sendNewLeftBubble(greetingInfo1)
+        }, 1000);
+        setTimeout(() => {
+            sendNewLeftBubble(greetingInfo2)
+        }, 5000);
+        setTimeout(() => {
+            sendNewLeftBubble(greetingInfo3)
+        }, 10000);
+        setTimeout(() => {
+            sendNewLeftBubble(greetingInfo4)
+        }, 14000);
+        setTimeout(() => {
+            sendNewLeftBubble("https://github.com/iyu46")
+        }, 18000);
+    }, [])
 
     const createBubble = (contents: string, index: number, fadeIn?: boolean) => {
         const bubbleChatboxClass = ["chat-receiving", "chat-sending"];
@@ -56,10 +81,17 @@ const App = () => {
 
     const handleMovingAnimationEnd = () => {
         colourCounter = 0;
-        setCurrentMessage("that's good to hear!");
-        setMessageLog([...messageLog, "that's good to hear!"])
+        setCurrentMessage(nextMessage)
+        setMessageLog([...messageLog, nextMessage])
+        setNextMessage("")
         setIsChatboxMoving(false);
         setIsMessageIncoming(false);
+    }
+
+    const sendNewLeftBubble = (message: string) => {
+        setCurrentMessage("");
+        setNextMessage(message);
+        setIsChatboxMoving(true);
     }
 
     return (
@@ -78,9 +110,18 @@ const App = () => {
                             createBubble(currentMessage, colourCounter++, true)
                         ) : null}
                     </div>
-                    {"add"}<input type="text" onKeyDown={handleSubmitInput} />
+
+                    {/* {"add"}<input type="text" onKeyDown={handleSubmitInput} />
+
                     {"replaceLast"}<input type="text" onKeyDown={handleReplaceLast} />
-                    <img src={logo} className="App-logo" alt="logo" onClick={() => setIsChatboxMoving(!isChatboxMoving)}/>
+
+                    <img src={logo} className="App-logo" alt="logo" onClick={() => setIsChatboxMoving(!isChatboxMoving)}/> */}
+
+                    <span className="footerText">
+                        contact me through iris@irisyu.ca!
+                    </span>
+                </div>
+                <div>
                 </div>
             </div>
         </MessageContext.Provider>

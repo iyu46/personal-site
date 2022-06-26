@@ -23,18 +23,33 @@ const Bubble: FC<{
 
     const addAnimationDelay = (delay: number): React.CSSProperties => {
         return {
-            animationDelay: String(0.125 + delay * 0.2) + "s"
+            animationDelay: String((0.125 + delay * 0.2)) + "s"
         }
     };
+
+    const checkIsBubbleLink = (text: string) => {
+        console.dir(text.split("https"));
+        if (text.split("https").length == 2) {
+            return (
+                <a href={text} className="bubble-text">
+                    {text}
+                </a>
+            )
+        } else {
+            return (
+                <span className="bubble-text">
+                {text}
+            </span>
+            )
+        }
+    }
 
     return (
         <MessageContext.Consumer>
             {mutatingMessage =>
                 <div className={"bubble-bg" + " " + getBubbleBgStyle(colourCounter % 4)}>
                     {message ? (
-                        <span className="bubble-text">
-                            {message}
-                        </span>
+                        checkIsBubbleLink(message)
                     ) : (
                         (mutatingMessage == "" ? (
                             React.Children.toArray(['•', '•', '•'].map((text, index) => (
@@ -43,9 +58,7 @@ const Bubble: FC<{
                                 </span>
                             )))
                         ) : (
-                            <span className="bubble-text">
-                                {mutatingMessage}
-                            </span>
+                            checkIsBubbleLink(mutatingMessage)
                         ))
                     )}
                 </div>
