@@ -118,7 +118,7 @@ const App = () => {
                     <img src={logo} className="App-logo" alt="logo" onClick={() => setIsChatboxMoving(!isChatboxMoving)}/> */}
 
                     <span className="footerText">
-                        contact me through iris@irisyu.ca!
+                        contact me through iris (at) irisyu.ca!
                     </span>
                 </div>
                 <div>
