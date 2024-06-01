@@ -28,12 +28,18 @@ const Bubble: FC<{
     };
 
     const checkIsBubbleLink = (text: string) => {
-        console.dir(text.split("https"));
-        if (text.split("https").length == 2) {
+        // console.dir(text.split("https"));
+        const textSplit = text.split(": ");
+        if (textSplit.length == 2) {
+            const textIntoUrl = "https" + textSplit[1];
             return (
-                <a href={text} className="bubble-text">
-                    {text}
-                </a>
+                // <div>
+                //     <span className="bubble-text">{}</span>
+                //     <br />
+                    <a href={textSplit[1]} className="bubble-text">
+                        {textSplit[0]}
+                    </a>
+                // </div>
             )
         } else {
             return (

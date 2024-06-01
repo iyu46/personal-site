@@ -8,6 +8,9 @@ import {
     greetingInfo2,
     greetingInfo3,
     greetingInfo4,
+    github,
+    rca,
+    gamedoku
 } from './information/informationConstants';
 
 const App = () => {
@@ -33,8 +36,14 @@ const App = () => {
             sendNewLeftBubble(greetingInfo4)
         }, 14000);
         setTimeout(() => {
-            sendNewLeftBubble("https://github.com/iyu46")
+            sendNewLeftBubble(github)
         }, 18000);
+        setTimeout(() => {
+            sendNewLeftBubble(rca)
+        }, 22000);
+        setTimeout(() => {
+            sendNewLeftBubble(gamedoku)
+        }, 26000);
     }, [])
 
     const createBubble = (contents: string, index: number, fadeIn?: boolean) => {
